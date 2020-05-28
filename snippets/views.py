@@ -11,10 +11,21 @@
 # from rest_framework import mixins
 
 from rest_framework import generics
+from django.contrib.auth.models import User
 from snippets.models import Snippet
-from snippets.serializers import SnippetSerializer
+from snippets.serializers import SnippetSerializer, UserSerializer
 
 # 混合されたMixinを継承して作成したView
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 class SnippetList(generics.ListCreateAPIView):
